@@ -1,4 +1,4 @@
-const fetch = require("node-fetch");
+const request = require("request");
 
 class SevenTV {
     private readonly baseUrl: string;
@@ -49,10 +49,13 @@ class SevenTV {
 
     async getJson(uri) {
         return new Promise((resolve, reject) => {
-            fetch(uri)
-                .then(res => res.json())
-                .then(json => resolve(json))
-                .catch(err => reject(err));
+            request(uri, (error, response, body) => {
+                if (error) {
+                    reject(error);
+                }
+
+                resolve(JSON.parse(body));
+            });
         });
     }
 }
