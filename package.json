@@ -1,7 +1,7 @@
 {
   "name": "7tv-rest",
   "version": "1.0.0",
-  "description": "An API wrapper for the 7TV Rest API",
+  "description": "A library for interacting with the 7tv REST API",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -20,5 +20,21 @@
     "@types/jest": "^27.4.1",
     "ts-jest": "^27.1.4",
     "ts-node": "^10.7.0"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MelanX/7tv-rest.git"
+  },
+  "keywords": [
+    "7tv",
+    "7tv-rest",
+    "7tv typescript"
+  ],
+  "bugs": {
+    "url": "https://github.com/MelanX/7tv-rest/issues"
+  },
+  "homepage": "https://github.com/MelanX/7tv-rest#readme"
 }
