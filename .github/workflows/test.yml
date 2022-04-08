@@ -6,11 +6,15 @@ jobs:
     if: startsWith(github.repository, 'MelanX')
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+
       - name: Setup Node.js environment
         uses: actions/setup-node@v3.1.0
+        with:
+          node-version: "17"
 
-      - name: npm/yarn/pnpm install
-        uses: Jaid/action-npm-install@v1.2.4
+      - name: Install dependencies
+        run: npm i
 
       - name: Test
         run: npm run test
