@@ -1,6 +1,6 @@
 {
   "name": "7tv-rest",
-  "version": "1.0.4",
+  "version": "1.0.3",
   "description": "A library for interacting with the 7tv REST API",
   "main": "lib/src/index.js",
   "types": "lib/src/index.d.ts",
@@ -13,13 +13,16 @@
   "author": "MelanX",
   "license": "MIT",
   "dependencies": {
-    "typescript": "^4.6.3",
-    "node-fetch": "^2.6.7"
+    "node-fetch": "^2.6.7",
+    "typescript": "^4.6.3"
   },
   "devDependencies": {
+    "@types/node": "17.0.23",
+    "@types/node-fetch": "^2.6.1",
     "@types/jest": "^27.4.1",
     "ts-jest": "^27.1.4",
-    "ts-node": "^10.7.0"
+    "ts-node": "^10.7.0",
+    "@babel/preset-typescript": "^7.16.7"
   },
   "directories": {
     "test": "test"

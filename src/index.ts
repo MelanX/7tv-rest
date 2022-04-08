@@ -1,65 +1,42 @@
-const fetch = require("node-fetch");
+import fetch from "node-fetch";
 
-class SevenTV {
-    private readonly baseUrl: string;
-
-    constructor() {
-        this.baseUrl = 'https://api.7tv.app/v2'
+export namespace SevenTV {
+    
+    const baseUrl: string = 'https://api.7tv.app/v2'
+    
+    export async function getUser(username: string): Promise<User> {
+        return await(await fetch(`${baseUrl}/users/${encodeURIComponent(username)}`)).json() as User;
     }
 
-    async getUser(username) {
-        const uri = `${this.baseUrl}/users/${username}`;
-        return await this.getJson(uri) as User;
+    export async function getEmote(emoteId: string): Promise<Emote> {
+        return await(await fetch(`${baseUrl}/emotes/${encodeURIComponent(emoteId)}`)).json() as Emote;
     }
 
-    async getEmote(emoteId) {
-        const uri = `${this.baseUrl}/emotes/${emoteId}`;
-        return await this.getJson(uri) as Emote;
+    export async function getEmotes(username: string): Promise<Emote[]> {
+        return await(await fetch(`${baseUrl}/users/${encodeURIComponent(username)}/emotes`)).json() as Emote[];
     }
 
-    async getEmotes(username) {
-        const uri = `${this.baseUrl}/users/${username}/emotes`;
-        return await this.getJson(uri) as Emote[];
+    export async function getGlobalEmotes(): Promise<Emote[]> {
+        return await(await fetch(`${baseUrl}/emotes/global`)).json() as Emote[];
     }
 
-    async getGlobalEmotes() {
-        const uri = `${this.baseUrl}/emotes/global`;
-        return await this.getJson(uri) as Emote[];
+    async function getGlobalData(identifier: UserIdentifier): Promise<GlobalEmotesResponse> {
+        return await(await fetch(`${baseUrl}/badges?user_identifier=${encodeURIComponent(identifier)}`)).json() as GlobalEmotesResponse;
     }
 
-    async getBadges(user_identifier) {
-        if (user_identifier !== "object_id" && user_identifier !== "twitch_id" && user_identifier !== "login") {
-            throw new Error("Invalid user_identifier");
-        }
-        const uri = `${this.baseUrl}/badges?user_identifier=${user_identifier}`;
-        const data = await this.getJson(uri) as GlobalEmotesResponse;
-
-        return data.badges;
+    export async function getBadges(identifier: UserIdentifier): Promise<Badge[]> {
+        return (await getGlobalData(identifier)).badges;
     }
 
-    async getPaints(user_identifier) {
-        if (user_identifier !== "object_id" && user_identifier !== "twitch_id" && user_identifier !== "login") {
-            throw new Error("Invalid user_identifier");
-        }
-        const uri = `${this.baseUrl}/cosmetics?user_identifier=${user_identifier}`;
-        const data = await this.getJson(uri) as GlobalEmotesResponse;
-
-        return data.paints;
-    }
-
-    async getJson(uri) {
-        return new Promise((resolve, reject) => {
-            fetch(uri)
-                .then(res => res.json())
-                .then(json => resolve(json))
-                .catch(err => reject(err));
-        });
+    export async function getPaints(identifier: UserIdentifier): Promise<Paint[]> {
+        return (await getGlobalData(identifier)).paints;
     }
 }
 
-module.exports = () => {
-    return new SevenTV();
-};
+module.exports = SevenTV
+export default SevenTV
+
+export type UserIdentifier = 'object_id' | 'twitch_id' | 'login'
 
 export interface Emote {
     id: string;
