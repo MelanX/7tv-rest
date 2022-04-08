@@ -9,8 +9,8 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v3.1.0
 
-      - name: Install dependencies
-        run: npm install
+      - name: npm/yarn/pnpm install
+        uses: Jaid/action-npm-install@v1.2.4
 
       - name: Test
         run: npm run test
