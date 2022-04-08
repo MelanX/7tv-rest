@@ -1,0 +1,16 @@
+name: Test
+on: [ push, pull_request ]
+
+jobs:
+  deploy:
+    if: startsWith(github.repository, 'MelanX')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3.1.0
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Test
+        run: npm run test
