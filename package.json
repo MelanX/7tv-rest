@@ -1,6 +1,6 @@
 {
   "name": "7tv-rest",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A library for interacting with the 7tv REST API",
   "main": "lib/src/index.js",
   "types": "lib/src/index.d.ts",
