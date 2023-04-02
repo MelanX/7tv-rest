@@ -54,4 +54,10 @@ describe("SevenTV Rest API", () => {
         const paints = await SevenTV.getPaints('twitch_id');
         expect(paints.length).toBeGreaterThan(0);
     });
+
+    test('Fetch emote set', async() => {
+        const emoteSet = await SevenTV.getEmoteSet('624f45bc5a64e87b9502423a');
+        expect(emoteSet.name).toBe('MelanX\'s Emotes')
+        expect(emoteSet.emotes.length).toBeGreaterThan(0);
+    })
 });
